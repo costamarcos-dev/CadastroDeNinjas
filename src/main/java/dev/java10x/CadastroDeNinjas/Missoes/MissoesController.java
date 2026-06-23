@@ -27,8 +27,8 @@ public class MissoesController {
 
     // POST -- Mandar uma requisao para criar as missoes
     @PostMapping("/criar")
-    public String criarMissao(){
-        return "Missao criada com sucesso";
+    public MissoesModel criarMissao(@RequestBody MissoesModel missoes){
+        return missoesService.criarMissoes(missoes);
     }
 
     // PUT -- Mandar uma requisao para alterar as missoes

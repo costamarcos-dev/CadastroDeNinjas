@@ -8,7 +8,7 @@ import java.util.Optional;
 @Service
 public class MissoesService {
 
-    private MissoesRepository missoesRepository
+    private MissoesRepository missoesRepository;
 
     public MissoesService(MissoesRepository missoesRepository) {
         this.missoesRepository = missoesRepository;
@@ -21,6 +21,10 @@ public class MissoesService {
     public MissoesModel listarMissoesPorId(Long id){
         Optional<MissoesModel> missoesPorId = missoesRepository.findById(id);
                 return missoesPorId.orElse(null);
+    }
+
+    public MissoesModel criarMissoes(MissoesModel missoes){
+        return missoesRepository.save(missoes);
     }
 
 
