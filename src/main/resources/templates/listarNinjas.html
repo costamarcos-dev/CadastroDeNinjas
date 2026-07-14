@@ -1,8 +1,252 @@
 <!
 <html>
 <head>
+
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Tabela de Ninjas</title>
+    <style>
+        /* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS E PALETA DE CORES (TEMA NARUTO)
+   ========================================================================= */
+:root {
+    --bg-color: #fceddb;          /* Tom bege claro que lembra pergaminhos antigos */
+    --card-bg: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a5568;
+    --border-color: #e2e8f0;
+
+    /* Cores Temáticas Naruto */
+    --naruto-orange: #ff6b00;     /* Laranja clássico */
+    --konoha-blue: #1b365d;       /* Azul escuro das bandanas */
+    --jounin-green: #2d6a4f;      /* Verde dos coletes */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   TÍTULO DA PÁGINA
+   ========================================================================== */
+h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--konoha-blue);
+    margin-bottom: 30px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0px var(--naruto-orange);
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background-color: var(--naruto-orange);
+    margin: 8px auto 0 auto;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   ESTRUTURA DA TABELA (CONTAINER E RESPONSIVIDADE)
+   ========================================================================== */
+.table-container, table {
+    width: 100%;
+}
+
+.table-container {
+    max-width: 1200px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(217, 107, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 2px solid var(--konoha-blue);
+}
+
+table {
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 18px 20px;
+    vertical-align: middle;
+}
+
+/* Cabeçalho da Tabela */
+thead {
+    background-color: var(--konoha-blue);
+    border-bottom: 3px solid var(--naruto-orange);
+}
+
+th {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Corpo da Tabela */
+tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #fff9f2; /* Destaque suave com fundo alaranjado */
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO AUTOMÁTICA DA IMAGEM ABAULADA (1ª COLUNA)
+   ========================================================================== */
+tbody tr td:first-child img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+
+    /* Cantos abaulados/arredondados com curvatura moderna (estilo botão do card) */
+    border-radius: 16px;
+
+    border: 2px solid var(--naruto-orange);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Leve zoom na imagem ao passar o mouse na linha */
+tbody tr:hover td:first-child img {
+    transform: scale(1.06);
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO DOS DADOS DA TABELA
+   ========================================================================== */
+
+/* Estilo para ID e Nome */
+tbody tr td:nth-child(2) {
+    font-weight: bold;
+    color: var(--naruto-orange);
+}
+
+tbody tr td:nth-child(3) {
+    font-weight: 700;
+    color: var(--konoha-blue);
+    font-size: 1.1rem;
+}
+
+/* Badge de Rank */
+tbody tr td:nth-child(6) {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    background-color: var(--naruto-orange);
+    color: white;
+    margin-top: 12px;
+    box-shadow: 0 2px 4px rgba(255, 107, 0, 0.2);
+}
+
+/* Estilo para a coluna de missões */
+tbody tr td:nth-child(7) {
+    font-size: 0.95rem;
+}
+
+tbody tr td:nth-child(7) strong {
+    color: var(--jounin-green);
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO AUTOMÁTICA DOS BOTÕES DE AÇÃO (ÚLTIMA COLUNA)
+   ========================================================================== */
+
+/* Container que envolve os links de ação */
+tbody tr td:last-child {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 320px;
+}
+
+/* Estilo geral dos botões (Pílulas Modernas baseadas na imagem) */
+tbody tr td:last-child a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;           /* Formato pílula / arredondado */
+    text-transform: uppercase;     /* Caixa alta */
+    letter-spacing: 0.06em;        /* Espaçamento sutil entre letras */
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Efeito de profundidade e sombra */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Efeito Hover Geral (Levantar botão) */
+tbody tr td:last-child a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Efeito Active Geral (Pressionar botão) */
+tbody tr td:last-child a:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Cores Específicas dos Botões de Acordo com a Posição --- */
+
+/* 1º Botão: "Ver detalhes" (Laranja Gradiente Naruto) */
+tbody tr td:last-child a:nth-child(1) {
+    background: linear-gradient(135deg, #ff9e00 0%, #ff6b00 100%);
+}
+tbody tr td:last-child a:nth-child(1):hover {
+    background: linear-gradient(135deg, #ffb338 0%, #e05e00 100%);
+}
+
+/* 2º Botão: "Alterar" (Verde Gradiente Jounin/Folha) */
+tbody tr td:last-child a:nth-child(2) {
+    background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
+}
+tbody tr td:last-child a:nth-child(2):hover {
+    background: linear-gradient(135deg, #74c69d 0%, #1b4332 100%);
+}
+
+/* 3º Botão: "Deletar" (Vermelho Gradiente Uzumaki) */
+tbody tr td:last-child a:nth-child(3) {
+    background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
+}
+tbody tr td:last-child a:nth-child(3):hover {
+    background: linear-gradient(135deg, #ff758f 0%, #a4133c 100%);
+}
+    </style>
 </head>
 <body>
 <h1>Lista de Ninjas</h1>
@@ -33,7 +277,7 @@
         <td>
             <a>Ver detalhes</a>
             <a>Alterar</a>
-            <a>Deletar</a>
+            <a th:href="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}">Deletar</a>
         </td>
 
     </tr>
