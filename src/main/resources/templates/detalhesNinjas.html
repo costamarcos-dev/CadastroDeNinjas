@@ -1,0 +1,250 @@
+<!
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Detalhe do Ninja</title>
+    <style>
+        /* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS
+   ========================================================================== */
+:root {
+    --bg-color: #fceddb;
+    --card-bg: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --border-color: #e2e8f0;
+
+    --naruto-orange: #ff6b00;
+    --konoha-blue: #1b365d;
+    --jounin-green: #2d6a4f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+/* ==========================================================================
+   TÍTULO
+   ========================================================================== */
+
+h1 {
+    font-size: 2.8rem;
+    color: var(--konoha-blue);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px var(--naruto-orange);
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 90px;
+    height: 5px;
+    margin: 10px auto;
+    border-radius: 5px;
+    background: var(--naruto-orange);
+}
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+div {
+    width: 100%;
+    max-width: 700px;
+    background: var(--card-bg);
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    border: 2px solid var(--konoha-blue);
+}
+
+/* ==========================================================================
+   IMAGEM
+   ========================================================================== */
+
+img {
+    display: block;
+    width: 220px;
+    height: 220px;
+    margin: auto;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 4px solid var(--naruto-orange);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+    transition: .3s;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* ==========================================================================
+   NOME
+   ========================================================================== */
+
+h2 {
+    text-align: center;
+    color: var(--konoha-blue);
+    margin: 25px 0;
+    font-size: 2rem;
+}
+
+/* ==========================================================================
+   DADOS
+   ========================================================================== */
+
+p {
+    font-size: 1.1rem;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+strong {
+    color: var(--naruto-orange);
+}
+
+/* ==========================================================================
+   MISSÕES
+   ========================================================================== */
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: var(--konoha-blue);
+    font-size: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+thead {
+    background: var(--konoha-blue);
+    color: white;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+tbody tr:hover {
+    background: #fff4e8;
+}
+
+tbody td:last-child {
+    font-weight: bold;
+    color: var(--naruto-orange);
+}
+
+/* ==========================================================================
+   BOTÃO VOLTAR
+   ========================================================================== */
+
+a {
+    margin-top: 30px;
+    display: inline-block;
+    background: var(--naruto-orange);
+    color: white;
+    text-decoration: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: .3s;
+    box-shadow: 0 5px 12px rgba(0,0,0,.2);
+}
+
+a:hover {
+    background: #e55f00;
+    transform: translateY(-3px);
+}
+
+a:active {
+    transform: scale(.96);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px;
+    }
+
+    div {
+        padding: 20px;
+    }
+
+    img {
+        width: 170px;
+        height: 170px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    table {
+        font-size: .9rem;
+    }
+
+}
+
+    </style>
+</head>
+<body>
+<h1>Detalhes do Ninja</h1>
+<div>
+    <img th:src="${ninja.imgUrl}" alt="${ninja.nome}" width="200" />
+    <h2 th:text="${ninja.nome}"></h2>
+    <p><strong>Email:</strong> <span th:text="${ninja.email}"></span></p>
+    <p><strong>Idade:</strong> <span th:text="${ninja.idade}"></span></p>
+    <p><strong>Rank:</strong> <span th:text="${ninja.rank}"></span></p>
+
+    <h3>Missões:</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Dificuldade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="missao : ${ninja.missoes}">
+            <td th:text="${missao.nome}"></td>
+            <td th:text="${missao.dificuldade}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/ninjas/ui/listar">Voltar para a lista de ninjas</a>
+</body>
+</html>
