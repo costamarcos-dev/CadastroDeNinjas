@@ -12,6 +12,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/ninjas/ui")
 public class NinjaControllerUI {
+
     private final NinjaService ninjaService;
 
     public NinjaControllerUI(NinjaService ninjaService) {
