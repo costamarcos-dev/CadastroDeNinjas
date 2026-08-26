@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Tabela de missões</title>
+    <style>
+        body {
+            background-color: #f7e9d7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .btn-adicionar {
+            background-color: #ff6600;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            display: inline-block;
+            margin-bottom: 25px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-adicionar:hover {
+            background-color: #e05500;
+        }
+
+        h1 {
+            color: #1a365d;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #ff6600;
+            margin: 8px auto 30px auto;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 90%;
+            max-width: 1100px;
+            background-color: #ffffff;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #ff6600;
+        }
+
+        thead tr {
+            background-color: #1a365d;
+            color: #ffffff;
+        }
+
+        th {
+            padding: 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #edf2f7;
+            transition: background-color 0.2s;
+        }
+
+        tbody tr:hover {
+            background-color: #fcf8f3;
+        }
+
+        td {
+            padding: 16px;
+            color: #2d3748;
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        td.acoes {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        td.acoes a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            display: inline-block;
+            text-align: center;
+        }
+
+        td.acoes a.btn-detalhes { background-color: #ff6600; }
+        td.acoes a.btn-alterar { background-color: #2e7d5e; }
+        td.acoes a.btn-deletar { background-color: #e53e65; }
+
+.btn-ninjas {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 14px 24px;
+    background-color: #ff6600;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-ninjas:hover {
+    background: #e55f00;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+
+    </style>
+</head>
+<body>
+
+<a class="btn-adicionar" th:href="@{/missoes/ui/adicionar}">+ Adicionar Nova Missão</a>
+<h1>Lista de Missões</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Dificuldade</th>
+        <th>Ninjas</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="missao : ${missoes}">
+        <td th:text="${missao.id}"></td>
+        <td th:text="${missao.nome}"></td>
+        <td th:text="${missao.dificuldade}"></td>
+        <td>
+            <div th:if="${missao.ninjas != null and !#lists.isEmpty(missao.ninjas)}">
+                <span th:each="ninja, iter : ${missao.ninjas}">
+                    <span th:text="${ninja.nome}"></span><span th:if="${!iter.last}">, </span>
+                </span>
+            </div>
+            <span th:if="${missao.ninjas == null or #lists.isEmpty(missao.ninjas)}">Sem Ninja cadastrado para a missão</span>
+        </td>
+        <td class="acoes">
+            <a class="btn-detalhes" th:href="@{/missoes/ui/listar/{id}(id=${missao.id})}">> Ver detalhes</a>
+            <a class="btn-alterar" th:href="@{/missoes/ui/alterar/{id}(id=${missao.id})}">Alterar</a>
+            <a class="btn-deletar" th:href="@{/missoes/ui/deletar/{id}(id=${missao.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<td>
+<a class="btn-ninjas" th:href="@{/ninjas/ui/listar}">Lista de Ninjas</a>
+</td>
+
+</body>
+</html>
+</html>
