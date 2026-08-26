@@ -245,6 +245,33 @@ tbody tr td a[href*="deletar"]:hover {
     content: "➕ ";
     font-size: 1rem;
 }
+
+ .btn-missoes {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 14px 24px;
+    background: var(--naruto-orange);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-missoes:hover {
+    background: #e55f00;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.btn-missoes:active {
+    transform: scale(0.96);
+}
+
+
+
     </style>
 </head>
 <body>
@@ -283,6 +310,9 @@ tbody tr td a[href*="deletar"]:hover {
     </tr>
     </tbody>
 </table>
+
+<a class="btn-missoes" th:href="@{/missoes/ui/listar}">Lista de Missões</a>
+
 
 </body>
 </html>
