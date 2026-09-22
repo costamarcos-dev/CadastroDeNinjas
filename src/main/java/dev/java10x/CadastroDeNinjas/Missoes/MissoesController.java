@@ -1,6 +1,5 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
-import dev.java10x.CadastroDeNinjas.Ninjas.NinjaDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,7 +51,7 @@ public class MissoesController {
     @PostMapping("/criar")
     @Operation(summary = "Criar uma nova missao", description = "Rota cria uma nova missao e insere no banco de dado")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Missão criada com sucesso"),
+            @ApiResponse(responseCode = "201", description = "Missao criada com sucesso"),
             @ApiResponse(responseCode = "400", description = "Erro na criacao da missao " )
     })
     public ResponseEntity <String> criarMissao(@RequestBody MissoesDTO missoes){
@@ -69,7 +68,7 @@ public class MissoesController {
             @ApiResponse(responseCode = "400", description = "Missao não encontrada, nao foi possivel alterar"),
     })
     public ResponseEntity<?> alterarMissaoPorId(
-        @Parameter(description = "Usuario manda o id no caminho da requisiçao")
+        @Parameter(description = "Usuario manda o id no caminho da requisicao")
         @PathVariable Long id,
         @Parameter(description = "Usuario manda os dados da missao a ser atualizada no corpo da requisicao")
         @RequestBody MissoesDTO missaoAtualizada){
